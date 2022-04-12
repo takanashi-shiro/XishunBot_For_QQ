@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="12135d51-83c8-436c-86b5-6f85a13fc817" name="server">
+        <fileTransfer accessType="SFTP" host="takanashi-shiro.top" port="22" sshConfigId="9bf6c9fa-30fc-4bef-9237-870c85ea92a8" sshConfig="root@takanashi-shiro.top:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="a669fbfe-e37a-4eb6-8b8e-6b3ce2b35a02" name="github">
+        <fileTransfer accessType="SFTP" port="22" sshConfigId="b0da58c4-9acb-48ec-ac1c-bd0c2e97fca8" sshConfig="github">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

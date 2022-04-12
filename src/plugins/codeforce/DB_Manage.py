@@ -1,13 +1,6 @@
 import mysql.connector
 from .get_now_grade import get_now_grade
-
-config = {
-    'user': 'root',
-    'password': '2dErPVpn7hk9TXhv',
-    'host': 'takanashi-shiro.top',
-    'port': '33066',
-    'database': 'qq_bot'
-}
+from ..config import SQL_config as config
 
 
 def link():

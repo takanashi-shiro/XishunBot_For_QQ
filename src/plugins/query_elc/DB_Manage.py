@@ -3,14 +3,8 @@ import datetime
 from .choose_building import choose_building
 from .choose_room import choose_room
 from .query_elc import query_elc
+from ..config import SQL_config as config
 
-config = {
-    'user': 'root',
-    'password': '2dErPVpn7hk9TXhv',
-    'host': 'takanashi-shiro.top',
-    'port': '33066',
-    'database': 'qq_bot'
-}
 
 elc_unit_price = 0.6
 

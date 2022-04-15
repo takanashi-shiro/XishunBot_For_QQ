@@ -73,7 +73,7 @@ def update(qq_number, city):
         return res
 
 
-def get_city(qq_number):
+def get_citys(qq_number):
     sql = "select citys from qq_yiqing where qq_number = '%s'" % qq_number
     con = link()
     cursor = con.cursor(buffered=True)

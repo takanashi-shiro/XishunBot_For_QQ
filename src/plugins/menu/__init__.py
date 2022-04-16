@@ -1,7 +1,7 @@
 from nonebot import *
 from nonebot.adapters.onebot.v11 import Event, MessageSegment
 
-menu = on_command('?')
+menu = on_command('菜单')
 
 @menu.handle()
 async def _menu_list(bot: Bot, event: Event):
@@ -11,10 +11,13 @@ async def _menu_list(bot: Bot, event: Event):
         '2. "/溜"     随机溜',
         '3. "/xishun" 开摆',
         '4. "/yy"     每日一言',
-        '6. "/?"      功能菜单',
+        '6. "/菜单"      功能菜单',
         '7. "/查电费"  查电费',
         '8. "/查课表"  查课表',
-        '9. "/cf"     codeforces分数查询'
+        '9. "/cf"     codeforces分数查询',
+        '10. "/查天气"  查询天气',
+        '11. "/查疫情"  查疫情情况',
+        '12. /抽卡      模拟明日方舟抽卡',
     ]
     msg = ''
     for i in menu_list:

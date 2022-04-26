@@ -48,6 +48,6 @@ async def announce_main(bot: Bot, event: MessageEvent):
                 await announce_com.send("用户："+user_nicknames[cnt]+" "+str(send_id)+"已发送\n目前进度"+"%d/%d"%(cnt+1,len(send_ids)))
                 await bot.call_api('send_msg', message_type=msg_type, user_id=send_id, message=msg)
             else:
-                await announce_com.send("群组:"+str(send_id) + "已发送\n目前进度"+"%d/%d"%(cnt+1,len(send_ids))")
+                await announce_com.send("群组:"+str(send_id) + "已发送\n目前进度"+"%d/%d"%(cnt+1,len(send_ids)))
                 await bot.call_api('send_msg', message_type=msg_type, group_id=send_id, message=msg)
             cnt+=1

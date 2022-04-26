@@ -1,6 +1,7 @@
 from nonebot import *
 from nonebot.adapters.onebot.v11 import Event, MessageEvent
 import time
+import random
 announce_com = on_command('announce',block=True)
 
 @announce_com.handle()
@@ -41,11 +42,12 @@ async def announce_main(bot: Bot, event: MessageEvent):
             }
             print(data)
             msg = msg + extra_msg
-            time.sleep(0.5)
+            times = random.uniform(0.7,3.4)
+            time.sleep(times)
             if msg_type == 'private':
-                await announce_com.send("用户："+user_nicknames[cnt]+" "+str(send_id)+"已发送")
+                await announce_com.send("用户："+user_nicknames[cnt]+" "+str(send_id)+"已发送\n目前进度"+"%d/%d"%(cnt+1,len(send_ids)))
                 await bot.call_api('send_msg', message_type=msg_type, user_id=send_id, message=msg)
             else:
-                await announce_com.send("群组:"+str(send_id) + "已发送")
+                await announce_com.send("群组:"+str(send_id) + "已发送\n目前进度"+"%d/%d"%(cnt+1,len(send_ids))")
                 await bot.call_api('send_msg', message_type=msg_type, group_id=send_id, message=msg)
             cnt+=1

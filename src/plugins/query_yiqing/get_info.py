@@ -3,42 +3,36 @@ import json
 import time
 
 # 观察开发者工具network找到url
-int_url = 'https://api.inews.qq.com/newsqa/v1/automation/foreign/country/ranklist'
 
-cn_url = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5&callback=&_=%d' % int(time.time() * 1000)
-
-china_url = 'https://api.inews.qq.com/newsqa/v1/query/inner/publish/modules/list?modules=chinaDayList,chinaDayAddList,nowConfirmStatis,provinceCompare'
-
+cn_url = 'https://c.m.163.com/ug/api/wuhan/app/data/list-total'
 
 def get_cn_page(page_cn):  # 请求中国疫情数据
     try:
-        resp = requests.get(url=page_cn)
-        if resp.status_code == 200:
-            return json.loads(resp.json()['data'])
-    except requests.exceptions.ConnectionError as e:
-        print('Error', e.args)
-
-
-def get_china_page(page_china):  # 请求中国每日疫情数据
-    try:
-        response = requests.get(url=page_china)
-        if response.status_code == 200:
-            return response.json()['data']
+        headers = {
+            'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) \
+                AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'
+        }
+        resp = requests.get(url=page_cn,headers=headers)
+        # print(resp.json()['data']['areaTree'][2]['children'][5])
+        resp.encoding = resp.apparent_encoding
+        status = resp.status_code
+        if status == 200:
+            return json.loads(resp.text)
     except requests.exceptions.ConnectionError as e:
         print('Error', e.args)
 
 
 def parse_province_page(items_cn):  # 解析中国各省疫情数据
     province_list = []
-    province_items = items_cn['areaTree'][0]['children']
+    province_items = items_cn['data']['areaTree'][2]['children']
     children_list = []
     for province_item in province_items:
         province_name = province_item['name']  # 省份
-        province_date = items_cn['lastUpdateTime'].split(' ')[0]  # 当前日期
+        province_date = items_cn['data']['lastUpdateTime']  # 当前日期
         province_confirm = province_item['total']['confirm']  # 累计确诊
         province_dead = province_item['total']['dead']  # 累计死亡
         province_heal = province_item['total']['heal']  # 累计治愈
-        province_nowConfirm = province_item['total']['nowConfirm']  # 现有确诊
+        province_nowConfirm = province_confirm - province_dead - province_heal  # 现有确诊
         province_confirm_add = province_item['today']['confirm']  # 当日新增确诊
         province_children_items = province_item['children']
         for i in range(0, len(province_children_items)):
@@ -57,11 +51,11 @@ def get_city(items_cn, province_children_items):
     for city_items in province_children_items:
         for city_item in city_items:
             city_name = city_item['name']  # 市(区)
-            city_date = items_cn['lastUpdateTime'].split(' ')[0]  # 当前日期
+            city_date = items_cn['data']['lastUpdateTime']  # 当前日期
             city_confirm = city_item['total']['confirm']  # 累计确诊
             city_dead = city_item['total']['dead']  # 累计死亡
             city_heal = city_item['total']['heal']  # 累计治愈
-            city_nowConfirm = city_item['total']['nowConfirm']  # 现有确诊
+            city_nowConfirm = city_confirm - city_dead - city_heal  # 现有确诊
             city_confirm_add = city_item['today']['confirm']  # 当日新增确诊
             city_province = city_item['province']
 

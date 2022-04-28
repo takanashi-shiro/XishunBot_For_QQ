@@ -42,7 +42,7 @@ async def announce_main(bot: Bot, event: MessageEvent):
             }
             print(data)
             msg = msg + extra_msg
-            times = random.uniform(0.7,3.4)
+            times = random.uniform(3.7,9.4)
             time.sleep(times)
             if msg_type == 'private':
                 await announce_com.send("用户："+user_nicknames[cnt]+" "+str(send_id)+"已发送\n目前进度"+"%d/%d"%(cnt+1,len(send_ids)))

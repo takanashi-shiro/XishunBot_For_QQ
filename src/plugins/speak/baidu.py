@@ -19,3 +19,4 @@ def baidu(msg:str):
         }
         search_url = f'建议百度: https://www.baidu.com/s?{urlencode(param)}'
         return search_url
+    return None

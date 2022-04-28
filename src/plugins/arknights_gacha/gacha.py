@@ -49,8 +49,8 @@ def arknights_gacha(roll_times):
 
 def gacha_init():
     global operator_list, list_count
-    # with open(os.path.abspath('./src/plugins/arknights_gacha/constData') + '/character_table.json', 'r') as infile:
-    with open('character_table.json', 'r',encoding='utf-8') as infile:
+    with open(os.path.abspath('./src/plugins/arknights_gacha/constData') + '/character_table.json','r',encoding='utf-8') as infile:
+    # with open('character_table.json', 'r',encoding='utf-8') as infile:
         js = json.loads(infile.read())
         for (key, value) in js.items():
             rarity = value["rarity"]
@@ -136,7 +136,7 @@ def generate_data(gachaList: list):
     for i in range(len(gachaList[0])):
         s += gachaList[0][i] + " " + gachaList[1][i] + "\n"
 
-    return s + str(save_count)
+    return s
 
 
 if __name__ == "__main__":

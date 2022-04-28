@@ -1,5 +1,4 @@
 from time import strftime, localtime
-
 from nonebot import *
 from nonebot.adapters.onebot.v11 import Event, MessageEvent, FriendAddNoticeEvent, RequestEvent, GroupRequestEvent, \
     FriendRequestEvent
@@ -30,3 +29,10 @@ async def req_auto_approve(bot: Bot, event: RequestEvent):
             )
             + (f"\n备注：{event.comment}" if event.comment else "")
     )
+    await bot.call_api('send_msg',message_type='private',user_id=764806602,message=header+sender+message)
+    if type == "friend":
+        await bot.set_friend_add_request(flag=event.flag,approve=True)
+    else:
+        await bot.set_group_add_request(flag=event.flag,approve=True)
+
+

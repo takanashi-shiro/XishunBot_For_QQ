@@ -23,7 +23,15 @@ def trans_in_baidu(s:str):
     }
     req = requests.get(url,params=params)
     reqs = json.loads(req.text)
-    res = reqs['trans_result'][0]['src']+'\n翻译结果：\n'+reqs['trans_result'][0]['dst']
+    source = ''
+    ans = ''
+    for i in reqs['trans_result']:
+        source+=i['src']
+        source+='\n'
+        ans+=i['dst']
+        ans+='\n'
+    res = source+'\n翻译结果：\n'+ans
+    print(res)
     return res
 
 def isalEng(s:str):
@@ -48,15 +56,13 @@ def translate(msg:str):
             True_ls.append(chr(i))
         True_ls.append('\n')
     msg_tmp = msg.replace(' ','')
+    msg_tmp = msg_tmp.replace('\r','')
+    msg_tmp = msg_tmp.replace('\n','')
+    msg_tmp = msg_tmp.replace('\t','')
+    msg_tmp = msg_tmp.replace('\f','')
     if isalEng(msg_tmp):
         return trans_in_baidu(msg)
 
 # if __name__ == '__main__':
-#     if not True_ls:
-#         for i in range(21,127):
-#             True_ls.append(chr(i))
-#         True_ls.append('\n')
-#     s = "The peer-to-peer (often abbreviated P2P) is a model of interprocess communication whose properties provide striking contrasts to the client/server model. P2P model involves two processes, rather than a client and a server, that execute on a temporary basis communicating as equals.\n" \
-#         "The P2P model is also a popular means of sharing files via the Internet. These items will be transferred between the two parties using the P2P model. However, this way of data transmission makes legal efforts to enforce copyright laws more difficult.\n" \
-#         "The term peer-to-peer refers to a system by which two processes communicate over a network (or internet). It is not a property of the network (or internet). A process might use the P2P model to communicate with another process and later use the client/server model to communicate with another process over the same network."
-#     print(isalEng(s))
+#     s = 'Hello World! This is 1st paragraph.\nThis is 2nd paragraph.'
+#     print(translate(s))

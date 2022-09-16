@@ -11,7 +11,7 @@ nonebot.load_plugins("src/plugins")
 driver = nonebot.get_driver()
 driver.register_adapter(OneBot_V11_Adapter)
 nonebot.load_builtin_plugins()
-# scheduler = require('nonebot_plugin_apscheduler').scheduler
+
 
 
 if __name__ == "__main__":

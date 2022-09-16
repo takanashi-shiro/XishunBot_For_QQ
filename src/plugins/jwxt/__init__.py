@@ -14,7 +14,7 @@ from .login import login
 from .DB_Manage import *
 
 query_kb = on_command('查课表',block=True)
-
+query_score = on_command('查成绩',block=True)
 qquser_dist = {
     '764806602': 'MTk0MDU2MjAwMDE=%%%bGtqaDQwMTAwMjc='
 }
@@ -30,6 +30,13 @@ class_map = {
 }
 
 trans = ['日', '一', '二', '三', '四', '五', '六', '日']
+
+
+def get_scores(session):
+    url = "http://218.75.197.123:83/jsxsd/dzqd/download_csnf?xsfs"
+    res = url+'&JSESSIONID='+session.cookies.get("JSESSIONID")
+    return res
+
 
 def get_res(now_week,now_day,class_ls):
     res_ls=[]
@@ -52,6 +59,18 @@ def get_res(now_week,now_day,class_ls):
     return res
 
 
+@query_score.handle()
+async def query_score_main(bot: Bot, event: Event, state: T_State = State()):
+    qq_number = event.get_user_id()
+    if qq_number in qquser_dist.keys():
+        encode = qquser_dist[str(event.get_user_id())]
+        sessions = login(encode)
+        res = get_scores(sessions)
+        await bot.call_api('send_msg',message_type='private',user_id=qq_number,message=res)
+        await query_score.finish('查询成功了！快去康康私聊！')
+    else:
+        await query_score.finish('暂无信息，快去用查课表绑定一下腻')
+    pass
 
 @query_kb.handle()
 async def query_kb_main(bot: Bot, event: Event, state: T_State = State()):

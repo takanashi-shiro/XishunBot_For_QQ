@@ -146,8 +146,8 @@ class Source:
 
 
 sources = [
-    Source(("点歌", "qq点歌", "QQ点歌"), search_qq),
-    Source(("163点歌", "网易点歌", "网易云点歌"), search_163),
+    Source(("qq点歌", "QQ点歌"), search_qq),
+    Source(("点歌","163点歌", "网易点歌", "网易云点歌"), search_163),
     Source(("kuwo点歌", "酷我点歌"), search_kuwo),
     Source(("kugou点歌", "酷狗点歌"), search_kugou),
     Source(("migu点歌", "咪咕点歌"), search_migu),

@@ -14,9 +14,23 @@ def to_user(qq_number):
     try:
         cursor.execute(sql)
         con.commit()
+        con.close()
     except Exception as e:
         print(e)
         con.rollback()
+        con.close()
+    sql = "insert into trans_switch values(%s,%d)" % (qq_number,0)
+    con = link()
+    cursor = con.cursor(buffered=True)
+    try:
+        cursor.execute(sql)
+        con.commit()
+        con.close()
+    except Exception as e:
+        print(e)
+        con.rollback()
+        con.close()
+
 
 def update(qq_number, status):
     sql = "update trans_switch set switchs = '%d' where qq_number = '%s' " % (status, qq_number)

@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "XishunBot_For_QQ"
+version = "0.1.0"
+description = "XishunBot_For_QQ"
+authors = []
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+nonebot2 = "^2.0.0-beta.3"
+
+[tool.poetry.dev-dependencies]
+nb-cli = "^0.6.7"
+
+[tool.nonebot]
+plugins = []
+plugin_dirs = ["src/plugins"]
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,4 +1,4 @@
-import nonebot.adapters.cqhttp
+# import nonebot.adapters.cqhttp
 from nonebot import *
 from nonebot.adapters.onebot.v11 import Event, MessageSegment
 from nonebot.adapters.onebot.v11 import Message
